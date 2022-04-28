@@ -2,23 +2,20 @@ package com.app.authenticationapp.base
 
 import android.app.Activity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import com.app.authenticationapp.ktx.hideKeyboard
+import com.app.authenticationapp.prefs.UserPreference
+import com.google.gson.Gson
 import javax.inject.Inject
 
-abstract class BaseActivity<T : ViewDataBinding, V : ViewModel> : AppCompatActivity(), CoroutineScope {
+abstract class BaseActivity<T : ViewDataBinding, V : ViewModel> : AppCompatActivity() {
 
     lateinit var activity: Activity
     abstract val layoutId: Int
     abstract val bindingVariable: Int
-
-    override val coroutineContext = Dispatchers.IO
 
     abstract fun setUpObserver()
 
@@ -27,6 +24,12 @@ abstract class BaseActivity<T : ViewDataBinding, V : ViewModel> : AppCompatActiv
     @Inject
     lateinit var mViewModel: V
     lateinit var binding: T
+
+    @Inject
+    lateinit var gson: Gson
+
+    @Inject
+    lateinit var userPreference: UserPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,19 +47,15 @@ abstract class BaseActivity<T : ViewDataBinding, V : ViewModel> : AppCompatActiv
 
         setUpObserver()
     }
+    override fun onResume() {
+        super.onResume()
 
-    fun showSnackbar(msg: String) {
-        //binding.root.showSnackbar(msg)
+        hideKeyboard()
     }
 
-    fun delay(delay: Long, function: () -> Unit) {
-        Handler(Looper.getMainLooper()).postDelayed(function, delay)
-    }
+    override fun onBackPressed() {
+        super.onBackPressed()
 
-    fun getRandomId(length: Int): String {
-        val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')
-        return (1..length)
-            .map { allowedChars.random() }
-            .joinToString("")
+        hideKeyboard()
     }
 }

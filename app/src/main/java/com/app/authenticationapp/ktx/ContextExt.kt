@@ -9,11 +9,14 @@ import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.getColorOrThrow
 import androidx.core.content.res.getDrawableOrThrow
+import com.app.authenticationapp.utils.AppConstants
 import java.util.*
 
 fun Context.getInteger(@IntegerRes resId: Int) =
@@ -105,4 +108,39 @@ fun <T> Activity.startNewActivity(
     if (finish) {
         finish()
     }
+}
+
+fun Context.hideKeyboard() {
+    val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    //Find the currently focused view, so we can grab the correct window token from it.
+    val activity = this as Activity
+    var view = activity.currentFocus
+    //If no view currently has focus, create a new one, just so we can grab a window token from it
+    if (view == null) {
+        view = View(this)
+    }
+    imm.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+fun checkStringValue(value: String?): Boolean {
+    if (value.isNullOrEmpty()) {
+        return false
+    }
+    return true
+}
+
+//check mobile validation
+
+fun String.isMobileNoValid(): Boolean {
+    return this.length < AppConstants.MOBILE_NO_LIMIT
+}
+
+//loader dialog
+
+fun Context.showLoaderDialog() {
+    LoadingDialog.showLoadDialog(this)
+}
+
+fun Context.hideLoaderDialog() {
+    LoadingDialog.hideLoadDialog();
 }

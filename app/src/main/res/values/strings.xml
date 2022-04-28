@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">AuthenticationApp</string>
     <string name="auth_app">Auth App</string>
+    <string name="enter_mobile_number">Enter Mobile Number...</string>
+    <string name="login">Login</string>
+    <string name="please_enter_mobile_no">Please enter mobile number.</string>
+    <string name="please_enter_valid_mobile_no">Please enter valid mobile number.</string>
+
+    <string name="general_something_went_wrong">Something went wrong</string>
+    <string name="OK">OK</string>
+    <string name="network_connection_error">Internet connection lost, please retry again.</string>
+
 </resources>

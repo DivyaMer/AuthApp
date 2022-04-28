@@ -8,10 +8,11 @@ import com.app.authenticationapp.R
 import com.app.authenticationapp.base.BaseActivity
 import com.app.authenticationapp.databinding.ActivitySplashBinding
 import com.app.authenticationapp.ktx.startNewActivity
+import com.app.authenticationapp.ui.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
+class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),SplashNavigator {
 
     override val layoutId = R.layout.activity_splash
 
@@ -25,7 +26,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
 
     private fun moveToNext() {
         Handler(Looper.getMainLooper()).postDelayed({
-            startNewActivity(SplashActivity::class.java, true)
+            startNewActivity(LoginActivity::class.java, true)
         }, 3000)
     }
 
