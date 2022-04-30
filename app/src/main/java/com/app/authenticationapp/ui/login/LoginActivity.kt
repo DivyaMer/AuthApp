@@ -24,9 +24,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(),Login
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mViewModel.setNavigator(this)
+        Log.e("TAG","login activity")
+
     }
 
     override fun setUpObserver() {
+        Log.e("TAG","login activity")
 
         mViewModel.loginResponseObservable.observe(this) {
             Log.e("TAG","login activity")

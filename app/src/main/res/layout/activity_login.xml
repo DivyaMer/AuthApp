@@ -50,6 +50,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/enter_mobile_number"
         android:text="@{viewModel.mobileNo}"
+        android:inputType="number"
         android:maxLength="10"
         android:textSize="20sp"
         android:textColor="@color/black"

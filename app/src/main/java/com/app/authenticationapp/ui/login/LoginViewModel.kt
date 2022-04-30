@@ -25,7 +25,7 @@ class LoginViewModel @Inject constructor(private val networkService: NetworkServ
     var countryCode = "+91"
     var mobileNo = ""
 
-    val loginResponseObservable = MutableLiveData<Resource<LoginResponse>>()
+    var loginResponseObservable = MutableLiveData<Resource<LoginResponse>>()
 
     fun login() {
         Log.e("TAG","login");

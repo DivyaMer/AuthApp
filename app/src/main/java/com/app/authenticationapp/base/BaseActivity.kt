@@ -42,10 +42,10 @@ abstract class BaseActivity<T : ViewDataBinding, V : ViewModel> : AppCompatActiv
         binding = DataBindingUtil.setContentView(activity, layoutId)
         binding.setVariable(bindingVariable, mViewModel)
         binding.executePendingBindings()
+        setUpObserver()
 
         init()
 
-        setUpObserver()
     }
     override fun onResume() {
         super.onResume()
